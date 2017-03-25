@@ -1,0 +1,100 @@
+import java.util.Scanner;
+public class BetterNimGame
+{
+  public static Scanner input = new Scanner(System.in);
+  public static Scanner input2 = new Scanner(System.in);
+  public static int stones = (int)(15*Math.random()+15);
+  public static int players;
+  public static int computer;
+  public static int take;
+  public static int counter = 1;
+  public static void main (String [] args)
+ {
+       System.out.println("Nim Game");
+       System.out.println("The goal of the game is to try to make your opponent pick up the last stone");
+       Player();
+ }
+ public static void Player()
+ {
+     System.out.println("For single player press one ");
+     players = input.nextInt();
+     if(players == 1)
+     {
+         System.out.println("First Player enter your name: ");
+         String first = input2.nextLine();
+     }
+     NumberofStones();
+ }
+ public static void NumberofStones()
+ {
+     do{
+         System.out.println("There are  " + stones + " stones. How many would you like?");
+         take = input.nextInt();
+         counter++;
+         isValidEntry();
+         Balance();
+         System.out.println("There are now " + stones + " stones.");
+         computer = (int) (3*Math.random()+1);
+         if(stones == 1)
+         {
+             Gameover();
+             break;
+         }
+         else if(computer > stones)
+         {
+             computer =  1;
+             
+         }
+         System.out.println("Computer takes " + computer + " stones.");
+         stones = stones - computer;
+         counter++;
+         System.out.println("There are now " + stones + " stones. ");
+         if(stones == 1)
+         {
+             Gameover();
+             break;
+         }
+     }while (stones>1);
+    }
+ public static void isValidEntry()
+ {
+     do{
+         if(take>3)
+         {
+             System.out.println("Invalid Entry Try Again");
+             take = input.nextInt();
+         }
+          if (take < 0)
+         {
+             System.out.println("Invalid Entry Try Again");
+             take = input.nextInt();
+         }
+         if(take == 0)
+         {
+             System.out.println("Invalid Entry Try Again");
+             take = input.nextInt();
+         }
+     }while(take > 3 && take < 0);
+     isValidEntry();
+ }
+ public static void Gameover()
+ {
+     if(counter % 2 == 0)
+     {
+         System.out.println("Computer Lose! Player wins!");
+         stones = 0;
+     }
+     else
+     {
+         System.out.println("You Lost!");
+         stones = 0;
+     }
+ }
+ public static void Balance()
+ {
+     stones = stones - take;
+    }
+}
+             
+         
+     
